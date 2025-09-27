@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:unique_supplement/core/utiles/styles.dart';
 
 class OrderRow extends StatelessWidget {
   const OrderRow({super.key, required this.title, required this.price});
@@ -10,11 +11,8 @@ class OrderRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: const TextStyle(fontSize: 16)),
-        Text(
-          price,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-        ),
+        Text(title, style: Styles.textStyle16),
+        Text(price, style: Styles.textStyle18),
       ],
     );
   }

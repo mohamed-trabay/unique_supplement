@@ -4,14 +4,15 @@ import 'package:go_router/go_router.dart';
 import 'package:unique_supplement/core/utiles/app_colors.dart';
 import 'package:unique_supplement/core/utiles/app_router.dart';
 import 'package:unique_supplement/core/utiles/app_strings.dart';
-import 'package:unique_supplement/core/utiles/assets.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
+import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_buttom.dart';
 import 'package:unique_supplement/core/widgets/fav_icon.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_item_image.dart';
 
 class CustomItem extends StatelessWidget {
-  const CustomItem({super.key});
+  const CustomItem({super.key, required this.productModel});
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,9 @@ class CustomItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kItemDetailsView);
+        GoRouter.of(
+          context,
+        ).push(AppRouter.kItemDetailsView, extra: productModel);
       },
       child: Stack(
         children: [
@@ -42,10 +45,15 @@ class CustomItem extends StatelessWidget {
               children: [
                 SizedBox(
                   height: height * 0.16,
-                  child: const CustomItemImage(imageURL: AssetsData.item),
+                  child: CustomItemImage(
+                    imageURL:
+                        productModel.images.isNotEmpty
+                            ? productModel.images[0].src
+                            : 'https://testapp.zbooma.com/wp-content/uploads/2025/09/Screenshot_%D9%A2%D9%A0%D9%A2%D9%A5%D9%A0%D9%A9%D9%A1%D9%A5_%D9%A1%D9%A8%D9%A5%D9%A9%D9%A2%D9%A9_Google.jpg',
+                  ),
                 ),
                 Text(
-                  'واي اف اكس كاربولين نكهة بارتقال ١.٩٥ كغ',
+                  productModel.name,
                   maxLines: 1,
                   textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
@@ -53,13 +61,18 @@ class CustomItem extends StatelessWidget {
                 ),
                 SizedBox(height: 2.h),
                 Text(
-                  'كاربوهيدرات',
+                  productModel.categories[0].name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: Styles.textStyle12.copyWith(
                     color: AppColors.greyprimmary,
                   ),
                 ),
                 SizedBox(height: 7.h),
-                Text('28,00ر.س', style: Styles.textStyle14Bold),
+                Text(
+                  '${productModel.price} ر.س',
+                  style: Styles.textStyle14Bold,
+                ),
                 CustomButton(title: AppStrings.addtoCart, onPressed: () {}),
               ],
             ),

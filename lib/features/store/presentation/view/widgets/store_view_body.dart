@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_item_list.dart';
 import 'package:unique_supplement/features/store/presentation/view/widgets/store_appbar.dart';
+import 'package:unique_supplement/features/store/presentation/view/widgets/store_list.dart';
 
 class StoreViewBody extends StatelessWidget {
   const StoreViewBody({super.key});
@@ -16,7 +16,7 @@ class StoreViewBody extends StatelessWidget {
           children: [
             const StoreAppBar(),
             SizedBox(height: 30.h),
-            const CustomItemList(),
+            const StoreList(),
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:unique_supplement/features/home/data/models/product_model/product_model/product_model.dart';
+import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
 import 'package:unique_supplement/features/home/data/repos/home_repo.dart';
 
 part 'newest_product_state.dart';

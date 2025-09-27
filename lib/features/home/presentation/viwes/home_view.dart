@@ -23,7 +23,7 @@ class HomeView extends StatelessWidget {
               create:
                   (context) =>
                       CategoriesCubit(getIt.get<HomeRepoImpl>())
-                        ..fetchcategories(),
+                        ..fetchCategories(),
             ),
             BlocProvider(
               create:

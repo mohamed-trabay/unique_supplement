@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/utiles/app_strings.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
+import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
 
 class DescribColumn extends StatelessWidget {
-  const DescribColumn({super.key});
+  const DescribColumn({super.key, required this.products});
+  final ProductModel products;
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +19,16 @@ class DescribColumn extends StatelessWidget {
           style: Styles.textStyle16.copyWith(fontWeight: FontWeight.w600),
         ),
         SizedBox(height: 10.h),
-        Text(
-          'مكمل غذائي مصمم خصيصًا لبناء العضلات وزيادة القوة، يجمع بين بروتين مصل الحليب عالي الجودة مع الكرياتين لنتائج أسرع في النمو العضلي وتحسين الأداء الرياضي',
-          style: Styles.textStyle16.copyWith(fontWeight: FontWeight.w400),
+        Html(
+          data: products.description,
+          style: {
+            "body": Style(
+              fontSize: FontSize(16),
+              fontWeight: FontWeight.w400,
+              color: Colors.black,
+              margin: Margins.zero, // يشيل المسافات الزايدة
+            ),
+          },
         ),
       ],
     );

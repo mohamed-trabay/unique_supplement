@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/utiles/app_colors.dart';
+import 'package:unique_supplement/core/utiles/styles.dart';
 import 'package:unique_supplement/core/widgets/action_button.dart';
 import 'package:unique_supplement/features/cart/presentation/view/widgets/order_row.dart';
 
@@ -11,7 +12,7 @@ class OrderDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 220.h,
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
         color: AppColors.background(context),
         borderRadius: const BorderRadius.only(
@@ -35,17 +36,11 @@ class OrderDetail extends StatelessWidget {
           const OrderRow(title: 'الخصم', price: '5.س'),
 
           Divider(height: 30.h, thickness: 1),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'المجموع:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '295 ر.س',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+              Text('المجموع:', style: Styles.textStyle18),
+              Text('295 ر.س', style: Styles.textStyle18),
             ],
           ),
           SizedBox(height: 25.h),

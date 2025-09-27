@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/widgets/custom_error_message.dart';
+import 'package:unique_supplement/core/widgets/custom_loading_indicator.dart';
 import 'package:unique_supplement/features/home/presentation/manger/categories_cubit/categories_cubit.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/category_card.dart';
 
@@ -22,9 +23,9 @@ class CategoryList extends StatelessWidget {
               itemCount: 5,
 
               itemBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.only(left: 18.0),
-                  child: CategoryCard(),
+                return Padding(
+                  padding: const EdgeInsets.only(left: 18.0),
+                  child: CategoryCard(categoryModel: state.categories[index]),
                 );
               },
             ),
@@ -32,7 +33,24 @@ class CategoryList extends StatelessWidget {
         } else if (state is CategoriesFailire) {
           return CustomErrorWidget(errMessage: state.errMessage);
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return SizedBox(
+            height: 99.h,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: EdgeInsets.all(10.0.r),
+                  child: CustomLoadingIndicator(
+                    isCircle: true,
+                    aspectRatio: 1,
+
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                );
+              },
+            ),
+          );
         }
       },
     );

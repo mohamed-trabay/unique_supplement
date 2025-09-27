@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/utiles/app_colors.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
 
@@ -10,51 +11,47 @@ class FilterSheet extends StatefulWidget {
 }
 
 class _FilterSheetState extends State<FilterSheet> {
-  bool discounted = false;
+  bool onSale = false;
   bool inStock = false;
-  String sortBy = 'default';
+  String sortBy = 'date';
   double _sliderValue = 50;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
+      padding: EdgeInsets.all(20.r),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'فلترة المنتجات',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 20),
+          Text('فلترة المنتجات', style: Styles.textStyle18),
+          SizedBox(height: 20.h),
 
           _PriceSlider(
             value: _sliderValue,
             onChanged: (val) => setState(() => _sliderValue = val),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           _FilterCheckboxes(
-            discounted: discounted,
+            discounted: onSale,
             inStock: inStock,
-            onChangedDiscounted: (val) => setState(() => discounted = val),
+            onChangedDiscounted: (val) => setState(() => onSale = val),
             onChangedInStock: (val) => setState(() => inStock = val),
           ),
 
-          const SizedBox(height: 10),
+          SizedBox(height: 10.h),
 
           _SortBySection(
             sortBy: sortBy,
             onChanged: (val) => setState(() => sortBy = val!),
           ),
 
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
-          // ✅ زر التطبيق
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context, {
-                'discounted': discounted,
+                'discounted': onSale,
                 'inStock': inStock,
                 'sortBy': sortBy,
                 'sliderValue': _sliderValue,

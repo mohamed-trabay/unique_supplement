@@ -19,7 +19,7 @@ class FavContainer extends StatelessWidget {
           Container(
             height: 140.h,
             width: double.infinity,
-            padding: const EdgeInsets.all(8),
+            padding: EdgeInsets.all(8.r),
             decoration: BoxDecoration(
               color: AppColors.background(context),
               borderRadius: BorderRadius.circular(16),
@@ -34,7 +34,11 @@ class FavContainer extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Image.asset(AssetsData.item, height: 120.h, fit: BoxFit.fill),
+                Image.asset(
+                  AssetsData.profielUser,
+                  height: 120.h,
+                  fit: BoxFit.fill,
+                ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Column(

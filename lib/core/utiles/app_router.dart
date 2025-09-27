@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:unique_supplement/features/cart/presentation/view/cart_view.dart';
+import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/category_view.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/home_view.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/item_details_view.dart';
@@ -44,7 +45,10 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kItemDetailsView,
-        builder: (context, state) => const ItemDetailsView(),
+        builder: (context, state) {
+          final productmodel = state.extra as ProductModel;
+          return ItemDetailsView(productmodel: productmodel);
+        },
       ),
       GoRoute(
         path: kSerchView,

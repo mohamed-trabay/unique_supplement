@@ -42,7 +42,7 @@ class HomeViewBody extends StatelessWidget {
                   title: AppStrings.newstsItems,
                 ),
                 SizedBox(height: 12.h),
-                const CustomItemList(),
+                const CustomItemList(limit: 8),
               ],
             ),
           ),

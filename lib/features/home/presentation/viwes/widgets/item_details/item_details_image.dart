@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:unique_supplement/core/utiles/assets.dart';
 import 'package:unique_supplement/core/widgets/fav_icon.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_item_image.dart';
 
 class ItemDetailsImage extends StatelessWidget {
-  const ItemDetailsImage({super.key});
-
+  const ItemDetailsImage({super.key, required this.imageURL});
+  final String imageURL;
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -14,7 +13,7 @@ class ItemDetailsImage extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .14),
-          child: const CustomItemImage(imageURL: AssetsData.item),
+          child: CustomItemImage(imageURL: imageURL),
         ),
         Positioned(
           left: 0,

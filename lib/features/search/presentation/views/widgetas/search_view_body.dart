@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
 import 'package:unique_supplement/core/widgets/custom_text_field.dart';
 import 'package:unique_supplement/features/search/presentation/views/widgetas/search_result_list.dart';
@@ -9,14 +10,14 @@ class SearchViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: EdgeInsets.all(20.0.r),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomTextField(),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           Text('Results', style: Styles.textStyle18),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           const Expanded(child: SearchResultListView()),
         ],
       ),

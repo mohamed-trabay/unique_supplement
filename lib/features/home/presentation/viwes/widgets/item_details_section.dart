@@ -3,12 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:unique_supplement/core/utiles/styles.dart';
 import 'package:unique_supplement/core/widgets/custom_counter.dart';
+import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/book_rating.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/describ_column.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/price_raw.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key});
+  const BookDetailsSection({super.key, required this.products});
+  final ProductModel products;
   @override
   Widget build(BuildContext context) {
     // final double width = MediaQuery.of(context).size.width;
@@ -18,7 +20,7 @@ class BookDetailsSection extends StatelessWidget {
       //  crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '1.8 kgنايترو تيك واي بروتين فانيلا كريم',
+          products.name,
           style: Styles.textStyle24,
           textAlign: TextAlign.center,
           maxLines: 1,
@@ -26,12 +28,12 @@ class BookDetailsSection extends StatelessWidget {
         ),
         SizedBox(height: 6.h),
 
-        const BookRating(rating: 4),
+        const BookRating(rating: 0),
         SizedBox(height: 20.h),
         const CustomCounter(),
-        const DescribColumn(),
+        DescribColumn(products: products),
         SizedBox(height: 16.h),
-        const PriceRow(),
+        PriceRow(products: products),
       ],
     );
   }
