@@ -22,11 +22,10 @@ class DescribColumn extends StatelessWidget {
         Html(
           data: products.description,
           style: {
-            "body": Style(
+            'body': Style(
               fontSize: FontSize(16),
               fontWeight: FontWeight.w400,
-              color: Colors.black,
-              margin: Margins.zero, // يشيل المسافات الزايدة
+              margin: Margins.zero,
             ),
           },
         ),

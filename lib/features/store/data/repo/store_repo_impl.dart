@@ -13,7 +13,7 @@ class StoreRepoImpl implements StoreRepo {
   Future<Either<Failure, List<ProductModel>>> fetchFilteredProducts({
     bool? onSale,
     bool? inStock,
-    String? orderBy,
+    String? sortBy,
     int? minPrice,
     int? maxPrice,
   }) async {
@@ -22,19 +22,42 @@ class StoreRepoImpl implements StoreRepo {
 
       if (onSale == true) queryParams['on_sale'] = 'true';
       if (inStock == true) queryParams['stock_status'] = 'instock';
-      if (orderBy != null) queryParams['orderby'] = orderBy;
-      if (minPrice != null) queryParams['min_price'] = '$minPrice';
-      if (maxPrice != null) queryParams['max_price'] = '$maxPrice';
+
+      // ترتيب المنتجات
+      if (sortBy != null) {
+        switch (sortBy) {
+          case 'popular':
+            queryParams['orderby'] = 'popularity';
+            queryParams['order'] = 'desc';
+            break;
+          case 'topRated':
+            queryParams['orderby'] = 'rating';
+            queryParams['order'] = 'desc';
+            break;
+          case 'newest':
+            queryParams['orderby'] = 'date';
+            queryParams['order'] = 'desc';
+            break;
+          default:
+            queryParams['orderby'] = 'menu_order';
+            queryParams['order'] = 'asc';
+        }
+      }
+
+      // نطاق السعر
+      if (minPrice != null) queryParams['min_price'] = minPrice.toString();
+      if (maxPrice != null) queryParams['max_price'] = maxPrice.toString();
 
       var data = await apiService.get(
         endpoint: 'products',
         queryParams: queryParams,
       );
 
-      List<ProductModel> products = [];
-      for (var item in data) {
-        products.add(ProductModel.fromJson(item));
-      }
+      List<ProductModel> products =
+          data
+              .map<ProductModel>((item) => ProductModel.fromJson(item))
+              .toList();
+
       return right(products);
     } catch (e) {
       if (e is DioException) {

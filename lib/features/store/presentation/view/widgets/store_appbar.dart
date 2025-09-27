@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/utiles/app_strings.dart';
 import 'package:unique_supplement/core/widgets/center_title.dart';
+import 'package:unique_supplement/features/store/presentation/manger/filtered_product_cubit/filtered_product_cubit.dart';
 import 'package:unique_supplement/features/store/presentation/view/widgets/filter_sheet.dart';
 
 class StoreAppBar extends StatelessWidget {
@@ -16,8 +18,8 @@ class StoreAppBar extends StatelessWidget {
         const CenteredTitle(title: AppStrings.allProduct),
         IconButton(
           icon: const Icon(Icons.filter_list, size: 28),
-          onPressed: () {
-            showModalBottomSheet(
+          onPressed: () async {
+            final filters = await showModalBottomSheet<Map<String, dynamic>>(
               isScrollControlled: true,
               context: context,
               shape: const RoundedRectangleBorder(
@@ -25,6 +27,16 @@ class StoreAppBar extends StatelessWidget {
               ),
               builder: (context) => const FilterSheet(),
             );
+
+            if (filters != null) {
+              context.read<FilteredProductCubit>().fetchFilteredProducts(
+                onSale: filters['discounted'] as bool?,
+                inStock: filters['inStock'] as bool?,
+                sortBy: filters['sortBy'] as String?,
+                minPrice: filters['minPrice'] as int?,
+                maxPrice: filters['maxPrice'] as int?,
+              );
+            }
           },
         ),
       ],

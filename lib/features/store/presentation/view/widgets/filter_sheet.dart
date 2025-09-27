@@ -13,8 +13,8 @@ class FilterSheet extends StatefulWidget {
 class _FilterSheetState extends State<FilterSheet> {
   bool onSale = false;
   bool inStock = false;
-  String sortBy = 'date';
-  double _sliderValue = 50;
+  String sortBy = 'default';
+  RangeValues _priceRange = const RangeValues(50, 250);
 
   @override
   Widget build(BuildContext context) {
@@ -26,21 +26,31 @@ class _FilterSheetState extends State<FilterSheet> {
           Text('فلترة المنتجات', style: Styles.textStyle18),
           SizedBox(height: 20.h),
 
-          _PriceSlider(
-            value: _sliderValue,
-            onChanged: (val) => setState(() => _sliderValue = val),
+          // RangeSlider للسعر
+          RangeSlider(
+            values: _priceRange,
+            min: 0,
+            max: 500,
+            divisions: 50,
+            labels: RangeLabels(
+              _priceRange.start.round().toString(),
+              _priceRange.end.round().toString(),
+            ),
+            activeColor: AppColors.yellowPrimary,
+            onChanged: (values) => setState(() => _priceRange = values),
           ),
           SizedBox(height: 20.h),
 
+          // خيارات الخصومات والمخزون
           _FilterCheckboxes(
             discounted: onSale,
             inStock: inStock,
             onChangedDiscounted: (val) => setState(() => onSale = val),
             onChangedInStock: (val) => setState(() => inStock = val),
           ),
-
           SizedBox(height: 10.h),
 
+          // ترتيب حسب
           _SortBySection(
             sortBy: sortBy,
             onChanged: (val) => setState(() => sortBy = val!),
@@ -48,13 +58,15 @@ class _FilterSheetState extends State<FilterSheet> {
 
           SizedBox(height: 20.h),
 
+          // زر تطبيق الفلاتر
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context, {
                 'discounted': onSale,
                 'inStock': inStock,
                 'sortBy': sortBy,
-                'sliderValue': _sliderValue,
+                'minPrice': _priceRange.start.toInt(),
+                'maxPrice': _priceRange.end.toInt(),
               });
             },
             style: ElevatedButton.styleFrom(
@@ -78,25 +90,31 @@ class _FilterSheetState extends State<FilterSheet> {
   }
 }
 
+// ================== RangeSlider Component ==================
 class _PriceSlider extends StatelessWidget {
-  final double value;
-  final ValueChanged<double> onChanged;
+  final RangeValues values;
+  final ValueChanged<RangeValues> onChanged;
 
-  const _PriceSlider({required this.value, required this.onChanged});
+  const _PriceSlider({required this.values, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-    return Slider(
+    return RangeSlider(
+      values: values,
+      min: 0,
+      max: 500,
+      divisions: 50,
+      labels: RangeLabels(
+        values.start.round().toString(),
+        values.end.round().toString(),
+      ),
       activeColor: AppColors.yellowPrimary,
-      value: value,
-      max: 100,
-      divisions: 100,
-      label: value.round().toString(),
       onChanged: onChanged,
     );
   }
 }
 
+// ================== Checkboxes Component ==================
 class _FilterCheckboxes extends StatelessWidget {
   final bool discounted;
   final bool inStock;
@@ -133,6 +151,7 @@ class _FilterCheckboxes extends StatelessWidget {
   }
 }
 
+// ================== SortBy Component ==================
 class _SortBySection extends StatelessWidget {
   final String sortBy;
   final ValueChanged<String?> onChanged;

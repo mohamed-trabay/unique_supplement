@@ -6,24 +6,26 @@ import 'package:unique_supplement/features/store/data/repo/store_repo_impl.dart'
 part 'filtered_product_state.dart';
 
 class FilteredProductCubit extends Cubit<FilteredProductState> {
-  FilteredProductCubit(this.storerepo) : super(FilteredProductInitial());
   final StoreRepoImpl storerepo;
+  FilteredProductCubit(this.storerepo) : super(FilteredProductInitial());
 
   void fetchFilteredProducts({
     bool? onSale,
     bool? inStock,
-    String? orderBy,
+    String? sortBy,
     int? minPrice,
     int? maxPrice,
   }) async {
     emit(FilteredProductsLoading());
+
     final result = await storerepo.fetchFilteredProducts(
       onSale: onSale,
       inStock: inStock,
-      orderBy: orderBy,
+      sortBy: sortBy,
       minPrice: minPrice,
       maxPrice: maxPrice,
     );
+
     result.fold(
       (failure) => emit(FilteredProductsFailure(failure.errMessage)),
       (products) => emit(FilteredProductsSuccess(products)),
