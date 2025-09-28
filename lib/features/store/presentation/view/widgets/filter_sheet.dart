@@ -16,7 +16,7 @@ class _FilterSheetState extends State<FilterSheet> {
   bool onSale = false;
   bool inStock = false;
   String sortBy = 'default';
-  RangeValues _priceRange = const RangeValues(50, 250);
+  RangeValues _priceRange = const RangeValues(0, 500);
 
   @override
   Widget build(BuildContext context) {

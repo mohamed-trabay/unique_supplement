@@ -17,7 +17,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var data = await apiService.get(
         endpoint: 'products',
-        queryParams: {'per_page': 40, 'orderby': 'date', 'order': 'asc'},
+        queryParams: {'per_page': 40, 'orderby': 'date', 'order': 'desc'},
       );
 
       List<ProductModel> products = [];

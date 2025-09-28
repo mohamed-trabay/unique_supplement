@@ -6,18 +6,26 @@ import 'package:unique_supplement/features/home/data/repos/home_repo.dart';
 part 'categories_state.dart';
 
 class CategoriesCubit extends Cubit<CategoriesState> {
-  CategoriesCubit(this.homeRepo) : super(CategoriesInitial());
   final HomeRepo homeRepo;
+  CategoriesCubit(this.homeRepo) : super(CategoriesInitial());
+
   Future<void> fetchCategories() async {
+    if (isClosed) return;
+
     emit(CategoriesLoading());
-    var result = await homeRepo.fetchCategories();
-    result.fold(
-      (failure) {
-        emit(CategoriesFailire(errMessage: failure.errMessage));
-      },
-      (categories) {
-        emit(CategoriesSuccess(categories: categories));
-      },
-    );
+
+    try {
+      final result = await homeRepo.fetchCategories();
+
+      if (isClosed) return;
+
+      result.fold(
+        (failure) => emit(CategoriesFailire(errMessage: failure.errMessage)),
+        (categories) => emit(CategoriesSuccess(categories: categories)),
+      );
+    } catch (e) {
+      if (isClosed) return;
+      emit(CategoriesFailire(errMessage: e.toString()));
+    }
   }
 }

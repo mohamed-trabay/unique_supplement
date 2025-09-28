@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:unique_supplement/core/utiles/styles.dart';
 import 'package:unique_supplement/core/widgets/custom_counter.dart';
 import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
@@ -8,32 +7,45 @@ import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/describ_column.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/price_raw.dart';
 
-class BookDetailsSection extends StatelessWidget {
+class BookDetailsSection extends StatefulWidget {
   const BookDetailsSection({super.key, required this.products});
   final ProductModel products;
+
+  @override
+  State<BookDetailsSection> createState() => _BookDetailsSectionState();
+}
+
+class _BookDetailsSectionState extends State<BookDetailsSection> {
+  int quantity = 1;
+
   @override
   Widget build(BuildContext context) {
-    // final double width = MediaQuery.of(context).size.width;
-    // final double height = MediaQuery.of(context).size.height;
-
     return Column(
-      //  crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          products.name,
+          widget.products.name,
           style: Styles.textStyle24,
           textAlign: TextAlign.center,
-          maxLines: 1,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         SizedBox(height: 6.h),
-
         const BookRating(rating: 0),
         SizedBox(height: 20.h),
-        const CustomCounter(),
-        DescribColumn(products: products),
+        DescribColumn(products: widget.products),
+
         SizedBox(height: 16.h),
-        PriceRow(products: products),
+
+        CustomCounter(
+          onChanged: (val) {
+            setState(() {
+              quantity = val;
+            });
+          },
+        ),
+        SizedBox(height: 20.h),
+
+        PriceRow(products: widget.products, quantity: quantity),
       ],
     );
   }

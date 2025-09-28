@@ -38,10 +38,10 @@ class SortBySection extends StatelessWidget {
         ),
         RadioListTile(
           activeColor: AppColors.yellowPrimary,
-          value: 'topRated',
+          value: 'topPriced',
           groupValue: sortBy,
           onChanged: onChanged,
-          title: const Text('الأعلى تقييمًا'),
+          title: const Text('الأعلى سعرا'),
         ),
         RadioListTile(
           activeColor: AppColors.yellowPrimary,

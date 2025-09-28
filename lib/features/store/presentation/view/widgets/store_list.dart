@@ -36,6 +36,7 @@ class StoreList extends StatelessWidget {
           return CustomErrorWidget(errMessage: state.errMessage);
         } else {
           return GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 6,
             itemBuilder: (context, index) {

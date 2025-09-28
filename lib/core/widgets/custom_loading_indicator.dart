@@ -18,12 +18,7 @@ class CustomLoadingIndicator extends StatelessWidget {
     return AspectRatio(
       aspectRatio: aspectRatio ?? 1,
       child: Shimmer(
-        duration: const Duration(seconds: 3),
-        interval: const Duration(seconds: 0),
-        color: Colors.white,
         colorOpacity: 0.5,
-        enabled: true,
-        direction: const ShimmerDirection.fromLTRB(),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.grey[300],

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCounter extends StatefulWidget {
-  const CustomCounter({super.key});
+  final ValueChanged<int>? onChanged;
+
+  const CustomCounter({super.key, this.onChanged});
 
   @override
   State<CustomCounter> createState() => _CustomCounterState();
@@ -10,6 +12,15 @@ class CustomCounter extends StatefulWidget {
 
 class _CustomCounterState extends State<CustomCounter> {
   int count = 1;
+
+  void _updateCount(int newCount) {
+    setState(() {
+      count = newCount;
+    });
+    if (widget.onChanged != null) {
+      widget.onChanged!(count);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,24 +36,18 @@ class _CustomCounterState extends State<CustomCounter> {
         children: [
           IconButton(
             icon: const Icon(Icons.add, size: 22),
-            onPressed: () {
-              setState(() {
-                count++;
-              });
-            },
+            onPressed: () => _updateCount(count + 1),
           ),
-
           Text(
             '$count',
             style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
           ),
-
           IconButton(
             icon: const Icon(Icons.remove, size: 22),
             onPressed: () {
-              setState(() {
-                if (count > 1) count--;
-              });
+              if (count > 1) {
+                _updateCount(count - 1);
+              }
             },
           ),
         ],

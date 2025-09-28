@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/utiles/app_colors.dart';
 import 'package:unique_supplement/core/utiles/assets.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
-import 'package:unique_supplement/core/widgets/custom_counter.dart';
 import 'package:unique_supplement/core/widgets/fav_icon.dart';
+import 'package:unique_supplement/features/cart/presentation/view/widgets/price_counter.dart';
 
 class CartContainer extends StatelessWidget {
   const CartContainer({super.key});
@@ -54,14 +54,7 @@ class CartContainer extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 10.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const CustomCounter(),
-
-                          Text('299.00ر.س', style: Styles.textStyle14Bold),
-                        ],
-                      ),
+                      const PriceCounter(basePrice: 22),
                     ],
                   ),
                 ),

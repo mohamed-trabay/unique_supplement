@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:unique_supplement/core/utiles/app_colors.dart';
 
 class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
@@ -16,7 +17,7 @@ class CustomBottomNav extends StatelessWidget {
     return Container(
       height: 80.h,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.background(context),
         boxShadow: [
           BoxShadow(
             // ignore: deprecated_member_use

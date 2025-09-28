@@ -14,7 +14,6 @@ class ItemDetailsViewBody extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
-          //hasScrollBody: false,
           child: Padding(
             padding: EdgeInsets.all(20.0.r),
             child: Column(

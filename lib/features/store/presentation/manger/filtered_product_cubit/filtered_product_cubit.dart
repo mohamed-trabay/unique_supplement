@@ -16,19 +16,27 @@ class FilteredProductCubit extends Cubit<FilteredProductState> {
     int? minPrice,
     int? maxPrice,
   }) async {
+    if (isClosed) return;
     emit(FilteredProductsLoading());
 
-    final result = await storerepo.fetchFilteredProducts(
-      onSale: onSale,
-      inStock: inStock,
-      sortBy: sortBy,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
-    );
+    try {
+      final result = await storerepo.fetchFilteredProducts(
+        onSale: onSale,
+        inStock: inStock,
+        sortBy: sortBy,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+      );
 
-    result.fold(
-      (failure) => emit(FilteredProductsFailure(failure.errMessage)),
-      (products) => emit(FilteredProductsSuccess(products)),
-    );
+      if (isClosed) return;
+      result.fold(
+        (failure) => emit(FilteredProductsFailure(failure.errMessage)),
+        (products) => emit(FilteredProductsSuccess(products)),
+      );
+    } catch (e) {
+      if (!isClosed) {
+        emit(FilteredProductsFailure(e.toString()));
+      }
+    }
   }
 }

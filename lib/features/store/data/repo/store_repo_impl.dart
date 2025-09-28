@@ -23,28 +23,24 @@ class StoreRepoImpl implements StoreRepo {
       if (onSale == true) queryParams['on_sale'] = 'true';
       if (inStock == true) queryParams['stock_status'] = 'instock';
 
-      // ترتيب المنتجات
-      if (sortBy != null) {
-        switch (sortBy) {
-          case 'popular':
-            queryParams['orderby'] = 'popularity';
-            queryParams['order'] = 'desc';
-            break;
-          case 'topRated':
-            queryParams['orderby'] = 'rating';
-            queryParams['order'] = 'desc';
-            break;
-          case 'newest':
-            queryParams['orderby'] = 'date';
-            queryParams['order'] = 'desc';
-            break;
-          default:
-            queryParams['orderby'] = 'menu_order';
-            queryParams['order'] = 'asc';
-        }
+      switch (sortBy ?? 'default') {
+        case 'popular':
+          queryParams['orderby'] = 'popularity';
+          queryParams['order'] = 'desc';
+          break;
+        case 'topPriced':
+          queryParams['orderby'] = 'price';
+          queryParams['order'] = 'desc';
+          break;
+        case 'newest':
+          queryParams['orderby'] = 'date';
+          queryParams['order'] = 'desc';
+          break;
+        default:
+          queryParams['orderby'] = 'menu_order';
+          queryParams['order'] = 'asc';
       }
 
-      // نطاق السعر
       if (minPrice != null) queryParams['min_price'] = minPrice.toString();
       if (maxPrice != null) queryParams['max_price'] = maxPrice.toString();
 
