@@ -20,7 +20,7 @@ class SearchViewBody extends StatelessWidget {
 
           const CustomTextField(),
           SizedBox(height: 16.h),
-          Text('Results', style: Styles.textStyle18),
+          Text('النتائج', style: Styles.textStyle18),
           SizedBox(height: 16.h),
           const Expanded(child: SearchResultListView()),
         ],

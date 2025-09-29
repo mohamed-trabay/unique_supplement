@@ -26,7 +26,12 @@ class ItemDetailsImage extends StatelessWidget {
           ),
         ),
         // ignore: prefer_const_constructors
-        Positioned(right: 0, top: 10, child: const FavIcon()),
+        Positioned(
+          right: 0,
+          top: 10,
+          child: Container(),
+          //FavIcon()
+        ),
       ],
     );
   }

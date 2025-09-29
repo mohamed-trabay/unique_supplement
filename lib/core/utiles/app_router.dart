@@ -8,6 +8,7 @@ import 'package:unique_supplement/features/home/presentation/viwes/newest_items_
 import 'package:unique_supplement/features/main_layout/presentation/views/main_layout.dart';
 import 'package:unique_supplement/features/search/presentation/views/search_view.dart';
 import 'package:unique_supplement/features/splash/presentation/views/splash_view.dart';
+import 'package:unique_supplement/features/store/presentation/view/store_view.dart';
 
 abstract class AppRouter {
   static const kHomeView = '/home';
@@ -17,6 +18,7 @@ abstract class AppRouter {
   static const kNewestItemsView = '/newestItems';
   static const kItemDetailsView = '/itemDetails';
   static const kSerchView = '/searchview';
+  static const kStoreView = '/storeview';
 
   static final router = GoRouter(
     routes: [
@@ -54,6 +56,7 @@ abstract class AppRouter {
         path: kSerchView,
         builder: (context, state) => const SearchView(),
       ),
+      GoRoute(path: kStoreView, builder: (context, state) => const StoreView()),
     ],
   );
 }

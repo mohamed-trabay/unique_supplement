@@ -73,11 +73,18 @@ class CustomItem extends StatelessWidget {
                   '${productModel.price} ر.س',
                   style: Styles.textStyle14Bold,
                 ),
-                CustomButton(title: AppStrings.addtoCart, onPressed: () {}),
+                CustomButton(
+                  title: AppStrings.moreOption,
+                  onPressed: () {
+                    GoRouter.of(
+                      context,
+                    ).push(AppRouter.kItemDetailsView, extra: productModel);
+                  },
+                ),
               ],
             ),
           ),
-          const Positioned(top: 8, left: 2, child: FavIcon()),
+          Positioned(top: 8, left: 2, child: FavIcon(product: productModel)),
         ],
       ),
     );

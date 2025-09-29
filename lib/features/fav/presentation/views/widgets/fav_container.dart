@@ -5,10 +5,13 @@ import 'package:unique_supplement/core/utiles/app_strings.dart';
 import 'package:unique_supplement/core/utiles/assets.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
 import 'package:unique_supplement/core/widgets/fav_icon.dart';
+import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_buttom.dart';
+import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_item_image.dart';
 
 class FavContainer extends StatelessWidget {
-  const FavContainer({super.key});
+  const FavContainer({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +37,23 @@ class FavContainer extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Image.asset(
-                  AssetsData.profielUser,
+                SizedBox(
                   height: 120.h,
-                  fit: BoxFit.fill,
+                  child: CustomItemImage(
+                    imageURL:
+                        product.images.isNotEmpty
+                            ? product.images[0].src
+                            : 'https://testapp.zbooma.com/wp-content/uploads/2025/09/Screenshot_%D9%A2%D9%A0%D9%A2%D9%A5%D9%A0%D9%A9%D9%A1%D9%A5_%D9%A1%D9%A8%D9%A5%D9%A9%D9%A2%D9%A9_Google.jpg',
+                  ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12.w),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        '1.8 kgنايترو تيك واي بروتين فانيلا كريم',
+                        product.name,
                         style: Styles.textStyle14Bold,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -57,7 +64,10 @@ class FavContainer extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('299.00ر.س', style: Styles.textStyle14Bold),
+                          Text(
+                            '${product.price} ر.س',
+                            style: Styles.textStyle14Bold,
+                          ),
                           CustomButton(
                             title: AppStrings.addtoCart,
                             onPressed: () {},
@@ -71,7 +81,7 @@ class FavContainer extends StatelessWidget {
             ),
           ),
 
-          const Positioned(right: -8, top: -2, child: FavIcon()),
+          Positioned(right: -8, top: -2, child: FavIcon(product: product)),
         ],
       ),
     );

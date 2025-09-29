@@ -18,7 +18,7 @@ class StoreRepoImpl implements StoreRepo {
     int? maxPrice,
   }) async {
     try {
-      final queryParams = {'per_page': '50'};
+      final queryParams = {'per_page': '20'};
 
       if (onSale == true) queryParams['on_sale'] = 'true';
       if (inStock == true) queryParams['stock_status'] = 'instock';

@@ -6,11 +6,13 @@ class AppStrings {
   static const String banner1 = 'ابدأ رحلتك مع أفضل المكملات الرياضية والصحية';
   static const String banner11 =
       '  من البروتينات إلى الفيتامينات، ومن الطاقة إلى الاستشفاء… كل ما تحتاجه لبناء جسد أقوى وحياة أكثر نشاطاً متوفر في مكان واحد."';
-  static const String banner11Button = '  تسوق الآن';
+  static const String banner11Button = 'تسوق الآن';
   static const String categories = 'الاقسام';
   static const String newstsItems = 'احدث المنتجات';
   static const String more = 'المزيد';
   static const String addtoCart = 'اضف الي السلة';
+  static const String moreOption = 'تحديد احد الخيارات';
+
   // profile
   static const String profile = 'الملف الشخصي';
   static const String pastOrders = 'الطلبات السابقة';

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:unique_supplement/core/utiles/app_router.dart';
 import 'package:unique_supplement/core/utiles/app_strings.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_buttom.dart';
@@ -43,7 +45,9 @@ class CustomBanner extends StatelessWidget {
                 SizedBox(height: 5.h),
                 CustomButton(
                   title: AppStrings.banner11Button,
-                  onPressed: () {},
+                  onPressed: () {
+                    GoRouter.of(context).push(AppRouter.kStoreView);
+                  },
                 ),
               ],
             ),

@@ -77,7 +77,12 @@ class CartContainer extends StatelessWidget {
             ),
           ),
 
-          const Positioned(right: -8, top: -2, child: FavIcon()),
+          Positioned(
+            right: -8,
+            top: -2,
+            child: Container(),
+            //FavIcon()
+          ),
         ],
       ),
     );
