@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:unique_supplement/features/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:unique_supplement/features/cart/presentation/view/cart_view.dart';
+import 'package:unique_supplement/features/fav/presentation/manger/fav_cubit/fav_cubit.dart';
 import 'package:unique_supplement/features/fav/presentation/views/fav_view.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/home_view.dart';
 import 'package:unique_supplement/features/main_layout/presentation/views/widgets/bottom_nav_bar.dart';
 import 'package:unique_supplement/features/store/presentation/view/store_view.dart';
 
 class MainLayout extends StatefulWidget {
-  const MainLayout({super.key, required Widget child});
+  const MainLayout({super.key});
 
   @override
   State<MainLayout> createState() => _MainLayoutState();
@@ -27,6 +31,8 @@ class _MainLayoutState extends State<MainLayout> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _currentIndex);
+    context.read<FavCubit>().loadFavorites();
+    context.read<CartCubit>().loadCart();
   }
 
   @override
@@ -45,17 +51,31 @@ class _MainLayoutState extends State<MainLayout> {
         },
         children: _screens,
       ),
-      bottomNavigationBar: CustomBottomNav(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() => _currentIndex = index);
-          _pageController.jumpToPage(index);
-          // لو عايز انيميشن:
-          // _pageController.animateToPage(
-          //   index,
-          //   duration: const Duration(milliseconds: 300),
-          //   curve: Curves.easeInOut,
-          // );
+      bottomNavigationBar: BlocBuilder<FavCubit, FavState>(
+        builder: (context, favState) {
+          int favCount = 0;
+          if (favState is FavoritesSuccess) {
+            favCount = favState.favorites.length;
+          }
+
+          return BlocBuilder<CartCubit, CartState>(
+            builder: (context, cartState) {
+              int cartCount = 0;
+              if (cartState is CartLoaded) {
+                cartCount = cartState.items.length;
+              }
+
+              return CustomBottomNav(
+                currentIndex: _currentIndex,
+                favCount: favCount,
+                cartCount: cartCount,
+                onTap: (index) {
+                  setState(() => _currentIndex = index);
+                  _pageController.jumpToPage(index);
+                },
+              );
+            },
+          );
         },
       ),
     );

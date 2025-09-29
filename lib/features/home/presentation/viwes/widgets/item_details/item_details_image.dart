@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:unique_supplement/core/widgets/fav_icon.dart';
+import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/custom_item_image.dart';
 
 class ItemDetailsImage extends StatelessWidget {
-  const ItemDetailsImage({super.key, required this.imageURL});
+  const ItemDetailsImage({
+    super.key,
+    required this.imageURL,
+    required this.product,
+  });
   final String imageURL;
+  final ProductModel product;
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -26,12 +32,7 @@ class ItemDetailsImage extends StatelessWidget {
           ),
         ),
         // ignore: prefer_const_constructors
-        Positioned(
-          right: 0,
-          top: 10,
-          child: Container(),
-          //FavIcon()
-        ),
+        Positioned(right: 0, top: 10, child: FavIcon(product: product)),
       ],
     );
   }

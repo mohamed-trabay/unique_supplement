@@ -18,8 +18,11 @@ class ItemDetailsViewBody extends StatelessWidget {
             padding: EdgeInsets.all(20.0.r),
             child: Column(
               children: [
-                ItemDetailsImage(imageURL: productmodel.images[0].src),
-                BookDetailsSection(products: productmodel),
+                ItemDetailsImage(
+                  imageURL: productmodel.images[0].src,
+                  product: productmodel,
+                ),
+                ItemDetailsSection(products: productmodel),
 
                 SizedBox(height: 26.h),
               ],

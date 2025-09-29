@@ -5,7 +5,7 @@ import 'package:unique_supplement/features/home/data/repos/home.repo.impl.dart';
 import 'package:unique_supplement/features/home/presentation/manger/categories_cubit/categories_cubit.dart';
 import 'package:unique_supplement/features/home/presentation/manger/newest_product_cubit/cubit/newest_product_cubit.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/home_view_body.dart';
-import 'package:unique_supplement/features/profiel/presentation/views/custom_drawer.dart';
+import 'package:unique_supplement/features/profiel/presentation/views/widgets/custom_drawer.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

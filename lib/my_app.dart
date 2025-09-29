@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/theme/app_theme.dart';
 import 'package:unique_supplement/core/utiles/app_router.dart';
+import 'package:unique_supplement/features/cart/presentation/manger/cubit/cart_cubit.dart';
 import 'package:unique_supplement/features/fav/presentation/manger/fav_cubit/fav_cubit.dart';
 
 class UniqueSupplement extends StatelessWidget {
@@ -10,8 +11,12 @@ class UniqueSupplement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FavCubit()..loadFavorites(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => FavCubit()..loadFavorites()),
+        BlocProvider(create: (context) => CartCubit()..loadCart()),
+      ],
+
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,

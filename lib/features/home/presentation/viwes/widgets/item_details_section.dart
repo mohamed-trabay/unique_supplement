@@ -7,15 +7,15 @@ import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/describ_column.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/price_raw.dart';
 
-class BookDetailsSection extends StatefulWidget {
-  const BookDetailsSection({super.key, required this.products});
+class ItemDetailsSection extends StatefulWidget {
+  const ItemDetailsSection({super.key, required this.products});
   final ProductModel products;
 
   @override
-  State<BookDetailsSection> createState() => _BookDetailsSectionState();
+  State<ItemDetailsSection> createState() => _ItemDetailsSectionState();
 }
 
-class _BookDetailsSectionState extends State<BookDetailsSection> {
+class _ItemDetailsSectionState extends State<ItemDetailsSection> {
   int quantity = 1;
 
   @override
@@ -33,10 +33,10 @@ class _BookDetailsSectionState extends State<BookDetailsSection> {
         const BookRating(rating: 0),
         SizedBox(height: 20.h),
         DescribColumn(products: widget.products),
-
         SizedBox(height: 16.h),
 
         CustomCounter(
+          initialValue: quantity,
           onChanged: (val) {
             setState(() {
               quantity = val;
@@ -45,7 +45,11 @@ class _BookDetailsSectionState extends State<BookDetailsSection> {
         ),
         SizedBox(height: 20.h),
 
-        PriceRow(products: widget.products, quantity: quantity),
+        PriceRow(
+          products: widget.products,
+          quantity: quantity,
+          product: widget.products,
+        ),
       ],
     );
   }
