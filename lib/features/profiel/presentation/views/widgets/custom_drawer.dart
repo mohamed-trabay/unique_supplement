@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unique_supplement/core/utiles/app_colors.dart';
 import 'package:unique_supplement/core/utiles/app_strings.dart';
 import 'package:unique_supplement/core/utiles/assets.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
+import 'package:unique_supplement/features/profiel/presentation/manger/user_cubit/user_cubit.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -16,14 +18,13 @@ class CustomDrawer extends StatelessWidget {
         children: [
           Center(child: Text(AppStrings.profile, style: Styles.textStyle24)),
           SizedBox(height: 10.h),
-          _buildProfileHeader(),
+          _buildProfileHeader(context),
           const Divider(
             thickness: 1,
             color: Colors.grey,
             endIndent: 20,
             indent: 20,
           ),
-
           CustomDrawerItem(
             icon: Icons.shopping_bag_outlined,
             title: AppStrings.pastOrders,
@@ -49,25 +50,12 @@ class CustomDrawer extends StatelessWidget {
             title: AppStrings.aboutUs,
             onTap: () {},
           ),
-
-          // const Divider(
-          //   thickness: 1,
-          //   color: Colors.grey,
-          //   endIndent: 20,
-          //   indent: 20,
-          // ),
-
-          // CustomDrawerItem(
-          //   icon: Icons.logout,
-          //   title: AppStrings.logout,
-          //   onTap: () {},
-          // ),
         ],
       ),
     );
   }
 
-  Widget _buildProfileHeader() {
+  Widget _buildProfileHeader(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.r),
       child: Row(
@@ -85,17 +73,39 @@ class CustomDrawer extends StatelessWidget {
           ),
           SizedBox(width: 12.w),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('محمد نبيل', style: Styles.textStyle18),
-                Text(
-                  'Mohamed@gmail.com',
-                  style: Styles.textStyle14.copyWith(
-                    color: AppColors.greyprimmary,
-                  ),
-                ),
-              ],
+            child: BlocBuilder<UserCubit, UserState>(
+              builder: (context, state) {
+                if (state is UserLoaded) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${state.user.firstName} ${state.user.lastName}',
+                        style: Styles.textStyle18,
+                      ),
+                      Text(
+                        state.user.email,
+                        style: Styles.textStyle14.copyWith(
+                          color: AppColors.greyprimmary,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('اسم المستخدم', style: Styles.textStyle18),
+                      Text(
+                        'البريد الإلكتروني',
+                        style: Styles.textStyle14.copyWith(
+                          color: AppColors.greyprimmary,
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              },
             ),
           ),
         ],

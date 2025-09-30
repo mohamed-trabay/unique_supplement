@@ -12,7 +12,6 @@ class UserDetailsViewBody extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(20.0.r),
         child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const CustomAppBar(title: 'معلومات المستخدم'),
             SizedBox(height: 26.h),

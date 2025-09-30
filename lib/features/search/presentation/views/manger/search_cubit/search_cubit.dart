@@ -10,18 +10,27 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.searchRepo) : super(SearchInitial());
 
   Future<void> search(String keyword) async {
+    // لو الكلمة فاضية
     if (keyword.trim().isEmpty) {
+      if (isClosed) return; // حماية من emit بعد close
       emit(SearchInitial());
       return;
     }
 
+    if (isClosed) return;
     emit(SearchLoading());
 
-    final result = await searchRepo.searchProducts(keyword);
+    try {
+      final result = await searchRepo.searchProducts(keyword);
 
-    result.fold(
-      (failure) => emit(SearchFailure(errMessage: failure.errMessage)),
-      (products) => emit(SearchSuccess(products: products)),
-    );
+      if (isClosed) return;
+      result.fold(
+        (failure) => emit(SearchFailure(errMessage: failure.errMessage)),
+        (products) => emit(SearchSuccess(products: products)),
+      );
+    } catch (e) {
+      if (isClosed) return;
+      emit(SearchFailure(errMessage: e.toString()));
+    }
   }
 }
