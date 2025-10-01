@@ -14,7 +14,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 99.h,
-      width: 77.w,
+      width: 80.w,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
         color: Colors.transparent,
@@ -22,18 +22,24 @@ class CategoryCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CustomCategoryImage(
-            imageUrl:
-                categoryModel.image?.src ??
-                'https://testapp.zbooma.com/wp-content/uploads/2025/08/Group-1000007728.png',
+          Expanded(
+            flex: 2,
+            child: CustomCategoryImage(
+              imageUrl:
+                  categoryModel.image?.src ??
+                  'https://testapp.zbooma.com/wp-content/uploads/2025/08/Group-1000007728.png',
+            ),
           ),
           SizedBox(height: 4.h),
-          Text(
-            categoryModel.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
-            style: Styles.textStyle12,
+          Flexible(
+            flex: 1,
+            child: Text(
+              categoryModel.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: Styles.textStyle12,
+            ),
           ),
         ],
       ),
@@ -59,7 +65,12 @@ class CustomCategoryImage extends StatelessWidget {
       placeholder:
           (context, url) =>
               const CustomLoadingIndicator(isCircle: true, aspectRatio: 1),
-      errorWidget: (context, url, error) => const Icon(Icons.error),
+      errorWidget:
+          (context, url, error) => CircleAvatar(
+            radius: 38.r,
+            backgroundColor: AppColors.yellowPrimary,
+            child: const Icon(Icons.error, color: Colors.red),
+          ),
     );
   }
 }

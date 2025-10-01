@@ -32,7 +32,7 @@ class CustomItemList extends StatelessWidget {
               crossAxisCount: 2,
               mainAxisSpacing: 16,
               crossAxisSpacing: 17,
-              childAspectRatio: 2.4 / 4,
+              childAspectRatio: 2.6 / 4,
             ),
           );
         } else if (state is NewestProductFailire) {
@@ -49,7 +49,7 @@ class CustomItemList extends StatelessWidget {
               crossAxisCount: 2,
               mainAxisSpacing: 16,
               crossAxisSpacing: 17,
-              childAspectRatio: 2.4 / 4,
+              childAspectRatio: 2.6 / 4,
             ),
           );
         }

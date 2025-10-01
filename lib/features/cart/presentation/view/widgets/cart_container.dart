@@ -24,7 +24,7 @@ class CartContainer extends StatelessWidget {
         ).push(AppRouter.kItemDetailsView, extra: cartitem.product);
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 16.0),
+        padding: EdgeInsets.only(bottom: 16.0.r),
         child: Stack(
           children: [
             Container(

@@ -16,8 +16,6 @@ class CustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double height = MediaQuery.of(context).size.height;
-
     return GestureDetector(
       onTap: () {
         GoRouter.of(
@@ -27,7 +25,6 @@ class CustomItem extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            height: height * 0.35,
             decoration: BoxDecoration(
               color: AppColors.background(context),
               boxShadow: [
@@ -42,16 +39,17 @@ class CustomItem extends StatelessWidget {
             ),
             padding: EdgeInsets.all(10.r),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                SizedBox(
-                  height: height * 0.16,
+                Expanded(
                   child: CustomItemImage(
                     imageURL:
                         productModel.images.isNotEmpty
                             ? productModel.images[0].src
-                            : 'https://testapp.zbooma.com/wp-content/uploads/2025/09/Screenshot_%D9%A2%D9%A0%D9%A2%D9%A5%D9%A0%D9%A9%D9%A1%D9%A5_%D9%A1%D9%A8%D9%A5%D9%A9%D9%A2%D9%A9_Google.jpg',
+                            : 'https://testapp.zbooma.com/wp-content/uploads/2025/09/placeholder.jpg',
                   ),
                 ),
+                SizedBox(height: 8.h),
                 Text(
                   productModel.name,
                   maxLines: 1,
@@ -61,7 +59,9 @@ class CustomItem extends StatelessWidget {
                 ),
                 SizedBox(height: 2.h),
                 Text(
-                  productModel.categories[0].name,
+                  productModel.categories.isNotEmpty
+                      ? productModel.categories[0].name
+                      : '',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyle12.copyWith(
@@ -73,6 +73,7 @@ class CustomItem extends StatelessWidget {
                   '${productModel.price} ر.س',
                   style: Styles.textStyle14Bold,
                 ),
+                SizedBox(height: 6.h),
                 CustomButton(
                   title: AppStrings.moreOption,
                   onPressed: () {

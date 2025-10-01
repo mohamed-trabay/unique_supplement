@@ -19,12 +19,10 @@ class CategoryList extends StatelessWidget {
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-
               itemCount: 5,
-
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.only(left: 18.0),
+                  padding: EdgeInsets.only(left: 18.0.w),
                   child: CategoryCard(categoryModel: state.categories[index]),
                 );
               },
@@ -40,11 +38,10 @@ class CategoryList extends StatelessWidget {
               itemCount: 5,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: EdgeInsets.all(10.0.r),
+                  padding: EdgeInsets.only(left: 18.0.w),
                   child: CustomLoadingIndicator(
                     isCircle: true,
                     aspectRatio: 1,
-
                     borderRadius: BorderRadius.circular(12),
                   ),
                 );

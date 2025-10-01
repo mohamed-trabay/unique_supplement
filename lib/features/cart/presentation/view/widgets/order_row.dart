@@ -13,7 +13,7 @@ class OrderRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(title, style: Styles.textStyle16),
-        Text(price, style: Styles.textStyle16),
+        Text(price, style: Styles.textStyle18),
       ],
     );
   }

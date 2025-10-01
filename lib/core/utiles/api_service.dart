@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:unique_supplement/core/utiles/api_keys.dart';
 
 class ApiService {
-  final _baseUrl = 'https://testapp.zbooma.com/wp-json/wc/v3/';
-  final _consumerKey = 'ck_2a500a41627727c2111dc2ab294f4f8120a4ec71';
-  final _consumerSecret = 'cs_ebdee3f3beaf55841668f42f9cb72942e06f4bb2';
+  final _baseUrl = ApiKeys.baseUrl;
+  final _consumerKey = ApiKeys.consumerKey;
+  final _consumerSecret = ApiKeys.consumerSecret;
 
   final Dio _dio;
   ApiService(this._dio);

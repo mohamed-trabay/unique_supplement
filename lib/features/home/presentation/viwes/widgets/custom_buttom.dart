@@ -23,7 +23,7 @@ class CustomButton extends StatelessWidget {
         backgroundColor: AppColors.yellowPrimary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(27)),
         minimumSize: Size(0, height ?? 24.h),
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 15.r),
       ),
       child: Text(
         title,

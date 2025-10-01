@@ -31,8 +31,12 @@ class OrderDetail extends StatelessWidget {
 
         double total = subtotal - discount;
 
+        if (total <= 0) {
+          return const SizedBox.shrink();
+        }
+
         return Container(
-          height: 220.h,
+          height: 250.h,
           padding: EdgeInsets.all(16.r),
           decoration: BoxDecoration(
             color: AppColors.background(context),
@@ -48,39 +52,41 @@ class OrderDetail extends StatelessWidget {
               ),
             ],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              OrderRow(
-                title: 'سعر المنتجات',
-                price: '${subtotal.toStringAsFixed(2)} ر.س',
-              ),
-              SizedBox(height: 11.h),
-              OrderRow(
-                title: 'الخصم',
-                price: '${discount.toStringAsFixed(2)} ر.س',
-              ),
-              Divider(height: 30.h, thickness: 1),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('المجموع:', style: Styles.textStyle18),
-                  Text(
-                    '${total.toStringAsFixed(2)} ر.س',
-                    style: Styles.textStyle18,
-                  ),
-                ],
-              ),
-              SizedBox(height: 25.h),
-              CustomButton(
-                title: 'اتمام الطلب',
-                height: 45.h,
-                onPressed: () {
-                  GoRouter.of(context).push(AppRouter.kUserDetailsView);
-                },
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                OrderRow(
+                  title: 'سعر المنتجات',
+                  price: '${subtotal.toStringAsFixed(2)} ر.س',
+                ),
+                SizedBox(height: 11.h),
+                OrderRow(
+                  title: 'الخصم',
+                  price: '${discount.toStringAsFixed(2)} ر.س',
+                ),
+                Divider(height: 30.h, thickness: 1),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('المجموع:', style: Styles.textStyle18),
+                    Text(
+                      '${total.toStringAsFixed(2)} ر.س',
+                      style: Styles.textStyle18,
+                    ),
+                  ],
+                ),
+                SizedBox(height: 25.h),
+                CustomButton(
+                  title: 'اتمام الطلب',
+                  height: 45.h,
+                  onPressed: () {
+                    GoRouter.of(context).push(AppRouter.kUserDetailsView);
+                  },
+                ),
+              ],
+            ),
           ),
         );
       },
