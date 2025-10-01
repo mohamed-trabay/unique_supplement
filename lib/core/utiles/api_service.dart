@@ -20,7 +20,7 @@ class ApiService {
     };
 
     var response = await _dio.get(
-      '$_baseUrl$endpoint',
+      '$_baseUrl/$endpoint',
       queryParameters: fullQuery,
     );
 

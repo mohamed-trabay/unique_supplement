@@ -6,6 +6,7 @@ import 'package:unique_supplement/features/home/presentation/viwes/home_view.dar
 import 'package:unique_supplement/features/home/presentation/viwes/item_details_view.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/newest_items_view.dart';
 import 'package:unique_supplement/features/main_layout/presentation/views/main_layout.dart';
+import 'package:unique_supplement/features/payment/presentation/views/widgets/payment_page.dart';
 import 'package:unique_supplement/features/profiel/presentation/views/user_details_view.dart';
 import 'package:unique_supplement/features/search/presentation/views/search_view.dart';
 import 'package:unique_supplement/features/splash/presentation/views/splash_view.dart';
@@ -21,6 +22,7 @@ abstract class AppRouter {
   static const kSerchView = '/searchview';
   static const kStoreView = '/storeview';
   static const kUserDetailsView = '/userview';
+  static const kPaymentsView = '/paymentview';
 
   static final router = GoRouter(
     routes: [
@@ -61,7 +63,22 @@ abstract class AppRouter {
       GoRoute(path: kStoreView, builder: (context, state) => const StoreView()),
       GoRoute(
         path: kUserDetailsView,
-        builder: (context, state) => const UserDetailsView(),
+        builder: (context, state) {
+          final amount = state.extra as double;
+
+          return UserDetailsView(amount: amount);
+        },
+      ),
+
+      GoRoute(
+        path: kPaymentsView,
+        builder: (context, state) {
+          final data = state.extra as Map<String, dynamic>;
+          final amount = data['amount'] as double;
+          final orderId = data['orderId'] as String;
+
+          return PaymentPage(amount: amount, orderId: orderId, iframeUrl: '');
+        },
       ),
     ],
   );

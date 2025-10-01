@@ -65,4 +65,20 @@ class CartCubit extends Cubit<CartState> {
     await LocalStorageService.clearCart();
     emit(CartLoaded([]));
   }
+
+  Future<void> addMultipleToCart(List<ProductModel> products) async {
+    final items = await LocalStorageService.loadCartItems();
+
+    for (var product in products) {
+      final index = items.indexWhere((item) => item.product.id == product.id);
+      if (index == -1) {
+        items.add(CartItemModel(product: product, quantity: 1));
+      } else {
+        items[index].quantity += 1;
+      }
+    }
+
+    await LocalStorageService.saveCartItems(items);
+    emit(CartLoaded(items));
+  }
 }

@@ -4,7 +4,8 @@ import 'package:unique_supplement/core/widgets/custom_app_bar.dart';
 import 'package:unique_supplement/features/profiel/presentation/views/widgets/user_details_form.dart';
 
 class UserDetailsViewBody extends StatelessWidget {
-  const UserDetailsViewBody({super.key});
+  const UserDetailsViewBody({super.key, required this.amount});
+  final double amount;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class UserDetailsViewBody extends StatelessWidget {
           children: [
             const CustomAppBar(title: 'معلومات المستخدم'),
             SizedBox(height: 26.h),
-            UserDetailsForm(),
+            UserDetailsForm(amount: amount),
           ],
         ),
       ),

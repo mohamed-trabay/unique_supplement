@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:unique_supplement/core/utiles/styles.dart';
 import 'package:unique_supplement/core/widgets/custom_counter.dart';
 import 'package:unique_supplement/features/home/data/models/product_model/product_model.dart';
-import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/book_rating.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/describ_column.dart';
 import 'package:unique_supplement/features/home/presentation/viwes/widgets/item_details/price_raw.dart';
 
@@ -29,8 +28,8 @@ class _ItemDetailsSectionState extends State<ItemDetailsSection> {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        SizedBox(height: 6.h),
-        const BookRating(rating: 0),
+        // SizedBox(height: 6.h),
+        // const BookRating(rating: 0),
         SizedBox(height: 20.h),
         DescribColumn(products: widget.products),
         SizedBox(height: 16.h),
@@ -45,11 +44,7 @@ class _ItemDetailsSectionState extends State<ItemDetailsSection> {
         ),
         SizedBox(height: 20.h),
 
-        PriceRow(
-          products: widget.products,
-          quantity: quantity,
-          product: widget.products,
-        ),
+        PriceRow(products: widget.products, quantity: quantity),
       ],
     );
   }

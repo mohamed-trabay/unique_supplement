@@ -24,7 +24,7 @@ class CartContainer extends StatelessWidget {
         ).push(AppRouter.kItemDetailsView, extra: cartitem.product);
       },
       child: Padding(
-        padding: EdgeInsets.only(bottom: 16.0.r),
+        padding: EdgeInsets.only(bottom: 20.0.r),
         child: Stack(
           children: [
             Container(
@@ -32,16 +32,17 @@ class CartContainer extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.all(8.r),
               decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
                 color: AppColors.background(context),
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.shadowColor(context),
-                    spreadRadius: 1,
-                    blurRadius: 4,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: AppColors.shadowColor(context),
+                //     spreadRadius: 1,
+                //     blurRadius: 2,
+                //     offset: const Offset(0, 1),
+                //   ),
+                //],
               ),
               child: Row(
                 children: [
@@ -90,7 +91,7 @@ class CartContainer extends StatelessWidget {
                   shape: BoxShape.circle,
                 ),
                 child: IconButton(
-                  icon: const Icon(Icons.close, size: 20),
+                  icon: Icon(Icons.close_rounded, size: 20.sp),
                   onPressed: () {
                     context.read<CartCubit>().removeFromCart(
                       cartitem.product.id,
@@ -100,8 +101,8 @@ class CartContainer extends StatelessWidget {
               ),
             ),
             Positioned(
-              right: -14,
-              top: -8,
+              right: 1,
+              top: 1,
               child: FavIcon(product: cartitem.product),
             ),
           ],

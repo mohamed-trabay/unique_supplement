@@ -25,7 +25,7 @@ class CustomBanner extends StatelessWidget {
         ),
 
         Align(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -40,10 +40,14 @@ class CustomBanner extends StatelessWidget {
                 Text(
                   AppStrings.banner11,
                   textAlign: TextAlign.center,
-                  style: Styles.textStyle14.copyWith(color: Colors.white),
+                  style: Styles.textStyle12.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-                SizedBox(height: 5.h),
+                SizedBox(height: 2.h),
                 CustomButton(
+                  height: 15.h,
                   title: AppStrings.banner11Button,
                   onPressed: () {
                     GoRouter.of(context).push(AppRouter.kStoreView);

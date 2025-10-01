@@ -82,7 +82,9 @@ class OrderDetail extends StatelessWidget {
                   title: 'اتمام الطلب',
                   height: 45.h,
                   onPressed: () {
-                    GoRouter.of(context).push(AppRouter.kUserDetailsView);
+                    GoRouter.of(
+                      context,
+                    ).push(AppRouter.kUserDetailsView, extra: total);
                   },
                 ),
               ],

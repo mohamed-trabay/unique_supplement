@@ -16,6 +16,9 @@ class CustomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool hasDiscount =
+        int.parse(productModel.price) < int.parse(productModel.regularPrice);
+
     return GestureDetector(
       onTap: () {
         GoRouter.of(
@@ -69,10 +72,31 @@ class CustomItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 7.h),
-                Text(
-                  '${productModel.price} ر.س',
-                  style: Styles.textStyle14Bold,
-                ),
+
+                if (hasDiscount)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${productModel.regularPrice} ر.س',
+                        style: Styles.textStyle12.copyWith(
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      SizedBox(width: 6.w),
+                      Text(
+                        '${productModel.price} ر.س',
+                        style: Styles.textStyle14Bold.copyWith(),
+                      ),
+                    ],
+                  )
+                else
+                  Text(
+                    '${productModel.price} ر.س',
+                    style: Styles.textStyle14Bold,
+                  ),
+
                 SizedBox(height: 6.h),
                 CustomButton(
                   title: AppStrings.moreOption,
@@ -85,6 +109,30 @@ class CustomItem extends StatelessWidget {
               ],
             ),
           ),
+
+          if (hasDiscount)
+            Positioned(
+              top: 8,
+              right: 8,
+              child: Container(
+                width: 30.w,
+                height: 30.w,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(15.w),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  'Sale',
+                  style: Styles.textStyle12.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+
           Positioned(top: 8, left: 2, child: FavIcon(product: productModel)),
         ],
       ),
