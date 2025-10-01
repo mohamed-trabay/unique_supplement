@@ -9,7 +9,6 @@ abstract class Styles {
   static TextStyle textStyle14 = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.normal,
-    //color: Colors.white,
   );
   static TextStyle textStyle14Bold = TextStyle(
     fontSize: 14.sp,
@@ -22,7 +21,6 @@ abstract class Styles {
   static TextStyle textStyle18 = TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeight.bold,
-    // color: Colors.white,
     shadows: const [
       Shadow(offset: Offset(0, 1), blurRadius: 3, color: Colors.black54),
     ],

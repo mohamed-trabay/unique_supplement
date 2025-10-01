@@ -10,9 +10,8 @@ class SearchCubit extends Cubit<SearchState> {
   SearchCubit(this.searchRepo) : super(SearchInitial());
 
   Future<void> search(String keyword) async {
-    // لو الكلمة فاضية
     if (keyword.trim().isEmpty) {
-      if (isClosed) return; // حماية من emit بعد close
+      if (isClosed) return;
       emit(SearchInitial());
       return;
     }

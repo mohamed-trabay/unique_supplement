@@ -33,10 +33,9 @@ class _UserDetailsFormState extends State<UserDetailsForm> {
   @override
   void initState() {
     super.initState();
-    // تحميل البيانات من الـ Cubit مباشرة بعد التأكد أنه جاهز
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final cubit = context.read<UserCubit>();
-      await cubit.loadUser(); // يحمل البيانات من SharedPreferences
+      await cubit.loadUser();
       final state = cubit.state;
       if (state is UserLoaded) {
         final user = state.user;
